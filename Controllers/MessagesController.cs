@@ -1,11 +1,11 @@
 using System.Threading.Tasks;
 using System.Web.Http;
-　
+
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
-　
+
 namespace Microsoft.Bot.Sample.SimpleEchoBot
 {
     [BotAuthentication]
@@ -30,7 +30,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             }
             return new HttpResponseMessage(System.Net.HttpStatusCode.Accepted);
         }
-　
+
         private Activity HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
@@ -56,7 +56,7 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
             else if (message.Type == ActivityTypes.Ping)
             {
             }
-　
+
             return null;
         }
     }
