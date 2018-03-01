@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
+using System.Net;
 using System.Web.Http;
-
+using System.Linq;
+using System;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
@@ -43,6 +45,13 @@ namespace Microsoft.Bot.Sample.SimpleEchoBot
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
+                if (message.MembersAdded.Any(o => o.Id == message.Recipient.Id))
+                {
+                    ConnectorClient client = new ConnectorClient(new Uri(message.ServiceUrl));
+                    var reply = message.CreateReply();
+                    reply.Text = "Hello mate how are you?";
+                    client.Conversations.ReplyToActivityAsync(reply);
+                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
